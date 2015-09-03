@@ -11,11 +11,11 @@ buildarch=4
 pkgbase=linux-imx6-wandboard-dt
 pkgname=('linux-imx6-wandboard-dt' 'linux-headers-imx6-wandboard-dt')
 # pkgname=linux-custom       # Build kernel with a different name
-_commit=89e78b9cf222d218e7eb1477b6f4b689ae97df78
-_srcname=linux-imx6-3.14-${_commit}
+_commit=e608526f89f979dc15b083319fdf5ef7cfef5503
+_srcname=linux-fslc-${_commit}
 _kernelname=${pkgname#linux}
 _basekernel=3.14
-pkgver=${_basekernel}.48
+pkgver=${_basekernel}.1.0.x
 pkgrel=1
 cryptodev_commit=da730106c2558c8e0c8e1b1b1812d32ef9574ab7
 bfqver=v7r8
@@ -25,7 +25,7 @@ url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'uboot-mkimage' 'git' 'lzop')
 options=('!strip')
-source=("linux-${_commit}::https://github.com/moonman/linux-imx6-3.14/archive/${_commit}.tar.gz"
+source=("linux-${_commit}::https://github.com/SolidRun/linux-fslc/archive/${_commit}.tar.gz"
         "cryptodev-${cryptodev_commit}.tar.gz::https://github.com/cryptodev-linux/cryptodev-linux/archive/${cryptodev_commit}.tar.gz"
         "git://git.code.sf.net/p/aufs/aufs3-standalone#branch=aufs${pkgver:0:4}.40+"
         '0001-Bluetooth-allocate-static-minor-for-vhci.patch'
@@ -37,17 +37,18 @@ source=("linux-${_commit}::https://github.com/moonman/linux-imx6-3.14/archive/${
         '002_cec.patch'
         '003_cec.patch')
 
-md5sums=('19ad4171537be8bb7b162b4a49c63f94'
+md5sums=('9c9fa71dbf209f74314cd6745c9f721e'
          '8fb4d3b7cc970351f3b5078b7893a107'
          'SKIP'
          '1b276abe16d14e133f3f28d9c9e6bd68'
          'defe6b5df33f8c11c2bf45f67ad35d8d'
          '2c10ccc1169884d2f12ba95fe11d29fd'
          '3baee38bf7fdcd47b2cc9628949b5784'
-         '1ea8de6e5c6cae2e33f5767c7f16174e'
+         'b4673e6bb1bf23a0d578c8e191430793'
          '8bf79a580704e8dab806f58043720a90'
          '6391a74bf1d451b74df6f189a25cf642'
          'a70798b63a0e7c3fb50a57ea1815d353')
+
 
 prepare() {
   cd "${srcdir}/${_srcname}"
@@ -76,6 +77,7 @@ prepare() {
   patch -Np1 -i ${srcdir}/003_cec.patch
 
   cat "${srcdir}/config" > ./.config
+  cp "${srcdir}/config" "${srcdir}/${_srcname}/.config"
 
   # add pkgrel to extraversion
   sed -ri "s|^(EXTRAVERSION =)(.*)|\1 \2-${pkgrel}|" Makefile
