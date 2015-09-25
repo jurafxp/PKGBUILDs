@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 3.14.48 Kernel Configuration
+# Linux/arm 3.14.51-1 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_MIGHT_HAVE_PCI=y
@@ -388,6 +388,7 @@ CONFIG_SOC_IMX6Q=y
 CONFIG_SOC_IMX6SL=y
 # CONFIG_SOC_IMX6SX is not set
 # CONFIG_SOC_VF610 is not set
+CONFIG_WAND_RFKILL=y
 # CONFIG_ARCH_OMAP3 is not set
 # CONFIG_ARCH_OMAP4 is not set
 # CONFIG_SOC_OMAP5 is not set
@@ -1408,7 +1409,7 @@ CONFIG_MAC80211_LEDS=y
 # CONFIG_MAC80211_MESSAGE_TRACING is not set
 # CONFIG_MAC80211_DEBUG_MENU is not set
 # CONFIG_WIMAX is not set
-CONFIG_RFKILL=m
+CONFIG_RFKILL=y
 CONFIG_RFKILL_LEDS=y
 CONFIG_RFKILL_INPUT=y
 # CONFIG_RFKILL_REGULATOR is not set
